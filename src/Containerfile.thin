@@ -1,4 +1,4 @@
-FROM ghcr.io/kubevda/vdimage-arch-xfce-base:latest
+FROM ghcr.io/kubevda/vdimage-arch-gnome-base:latest
 
 RUN set -exu \
   && pacman --noconfirm -Syyu \
