@@ -14,5 +14,3 @@ RUN set -exu \
     wget
 
 COPY rootfs.thin /
-
-CMD ["/bin/bash", "/entrypoint.sh"]

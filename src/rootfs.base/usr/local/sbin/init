@@ -53,19 +53,11 @@ echo "load-module module-native-protocol-unix auth-anonymous=1" > "${HOME}/.conf
 
 mkdir -pv /run/dbus
 
-/usr/bin/dbus-daemon --system --nofork --nopidfile &
-
-sudo -u epers /usr/bin/dbus-launch grdctl --headless vnc set-auth-method password
-sudo -u epers /usr/bin/dbus-launch grdctl --headless vnc set-password kubevda
-sudo -u epers /usr/bin/dbus-launch grdctl --headless vnc disable-view-only
-sudo -u epers /usr/bin/dbus-launch grdctl --headless vnc enable
-sudo -u epers /usr/bin/dbus-launch grdctl --headless status
-
-pkill dbus-daemon
+# Append the current environment to /etc/default/kvdi
+env >> /etc/default/kvdi
 
 echo "Granting ${USER} ownership of ${HOME}"
 chown -Rv "${USER}":"${GROUP}" "${HOME}"
 
-/usr/bin/supervisord \
-  -n \
-  -c /etc/supervisor/supervisord.conf
+export container=docker
+exec /usr/lib/systemd/systemd

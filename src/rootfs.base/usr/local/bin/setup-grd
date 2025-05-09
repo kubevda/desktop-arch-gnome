@@ -1,0 +1,9 @@
+#!/bin/bash
+
+systemctl --user --enable --now gnome-remote-desktop.service
+
+/usr/bin/dbus-launch /usr/bin/grdctl --headless vnc set-auth-method password
+/usr/bin/dbus-launch /usr/bin/grdctl --headless vnc set-password kubevda
+/usr/bin/dbus-launch /usr/bin/grdctl --headless vnc disable-view-only
+/usr/bin/dbus-launch /usr/bin/grdctl --headless vnc enable
+/usr/bin/dbus-launch /usr/bin/grdctl --headless status

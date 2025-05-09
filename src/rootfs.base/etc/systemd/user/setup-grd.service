@@ -1,0 +1,10 @@
+[Unit]
+Description=Configure Gnome-Remote-Desktop
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/setup-grd
+EnvironmentFile=/etc/default/kvdi
+
+[Install]
+WantedBy=default.target

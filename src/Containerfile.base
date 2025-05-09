@@ -3,18 +3,23 @@ FROM docker.io/archlinux:base
 RUN set -exu \
   && pacman --noconfirm -Syyu \
   && pacman --noconfirm -Syy \
-    dbus \
+    gdm \
     gnome-shell \
-    wayland \
-    xorg-xwayland \
     mesa \
-    sudo \
-    supervisor \
-    socat \
     net-tools \
     pulseaudio \
-    pulseaudio-alsa
+    pulseaudio-alsa \
+    socat \
+    sudo \
+    systemd \
+    wayland \
+    xorg-xwayland
 
 COPY rootfs.base /
 
-CMD ["/bin/bash", "/entrypoint.sh"]
+RUN set -exu \
+  && dbus-uuidgen --ensure=/etc/machine-id \
+  && dbus-uuidgen --ensure
+
+VOLUME ["/sys/fs/cgroup"]
+ENTRYPOINT ["/usr/local/sbin/init"]
