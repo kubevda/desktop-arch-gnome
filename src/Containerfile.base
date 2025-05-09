@@ -1,0 +1,14 @@
+FROM docker.io/archlinux:base
+
+RUN set -exu \
+  && pacman --noconfirm -Syyu \
+  && pacman --noconfirm -Syy \
+    dbus \
+    gnome-shell \
+    mesa \
+    sudo \
+    supervisor
+
+COPY rootfs.base /
+
+CMD ["/bin/bash", "/entrypoint.sh"]
