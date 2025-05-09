@@ -19,7 +19,10 @@ COPY rootfs.base /
 
 RUN set -exu \
   && dbus-uuidgen --ensure=/etc/machine-id \
-  && dbus-uuidgen --ensure
+  && dbus-uuidgen --ensure \
+  && systemctl enable user-init.service \
+  && systemctl --user --global enable gnome-shell.service \
+  && systemctl --user --global enable setup-grd.service
 
 VOLUME ["/sys/fs/cgroup"]
 ENTRYPOINT ["/usr/local/sbin/init"]

@@ -53,6 +53,8 @@ echo "load-module module-native-protocol-unix auth-anonymous=1" > "${HOME}/.conf
 
 mkdir -pv /run/dbus
 
+find /etc/default -type f -print | xargs -I{} bash -c '/usr/bin/envsubst < "$1" > "$1"' _ {}
+
 # Append the current environment to /etc/default/kvdi
 env >> /etc/default/kvdi
 
