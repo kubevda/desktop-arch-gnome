@@ -9,7 +9,8 @@ RUN set -exu \
     xorg-xwayland \
     mesa \
     sudo \
-    supervisor
+    supervisor \
+    socat
 
 COPY rootfs.base /
 
