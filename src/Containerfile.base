@@ -5,6 +5,8 @@ RUN set -exu \
   && pacman --noconfirm -Syy \
     dbus \
     gnome-shell \
+    wayland \
+    xorg-xwayland \
     mesa \
     sudo \
     supervisor
