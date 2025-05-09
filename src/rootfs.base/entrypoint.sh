@@ -47,10 +47,24 @@ echo "Setting up VNC socket directory at $(dirname ${DISPLAY_SOCK_ADDR})"
 mkdir -pv "$(dirname ${DISPLAY_SOCK_ADDR})"
 chown -Rv "${USER}":"${GROUP}" "$(dirname ${DISPLAY_SOCK_ADDR})"
 
-echo "Granting ${USER} ownership of ${HOME}"
-chown -Rv "${USER}":"${GROUP}" "${HOME}"
+echo "Setting up pulseaudio"
+mkdir -pv "${HOME}/.config/pulse"
+echo "load-module module-native-protocol-unix auth-anonymous=1" > "${HOME}/.config/pulse/default.pa"
 
 mkdir -pv /run/dbus
+
+/usr/bin/dbus-daemon --system --nofork --nopidfile &
+
+sudo -u epers /usr/bin/dbus-launch grdctl --headless vnc set-auth-method password
+sudo -u epers /usr/bin/dbus-launch grdctl --headless vnc set-password kubevda
+sudo -u epers /usr/bin/dbus-launch grdctl --headless vnc disable-view-only
+sudo -u epers /usr/bin/dbus-launch grdctl --headless vnc enable
+sudo -u epers /usr/bin/dbus-launch grdctl --headless status
+
+pkill dbus-daemon
+
+echo "Granting ${USER} ownership of ${HOME}"
+chown -Rv "${USER}":"${GROUP}" "${HOME}"
 
 /usr/bin/supervisord \
   -n \

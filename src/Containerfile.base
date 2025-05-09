@@ -10,7 +10,10 @@ RUN set -exu \
     mesa \
     sudo \
     supervisor \
-    socat
+    socat \
+    net-tools \
+    pulseaudio \
+    pulseaudio-alsa
 
 COPY rootfs.base /
 
