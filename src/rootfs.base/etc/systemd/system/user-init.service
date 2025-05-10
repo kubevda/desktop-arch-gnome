@@ -3,10 +3,9 @@ Description=SystemD User Init Process
 Wants=network.target
 
 [Service]
-Type=dbus
-BusName=org.kubevda.userinit
+Type=simple
 EnvironmentFile=/etc/default/kvdi
-ExecStart=/usr/local/sbin/fakegetty
+ExecStart=/usr/local/sbin/user-init
 UtmpIdentifier=cons
 TTYVHangup=yes
 KillMode=process

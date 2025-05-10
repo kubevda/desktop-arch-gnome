@@ -15,6 +15,7 @@ RUN set -exu \
     socat \
     sudo \
     systemd \
+    util-linux \
     wayland \
     xorg-xwayland
 
