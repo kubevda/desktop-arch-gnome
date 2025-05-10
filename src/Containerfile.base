@@ -6,6 +6,7 @@ RUN set -exu \
   && pacman --noconfirm -Syyu \
   && pacman --noconfirm -Syy \
     gdm \
+    gnome-remote-desktop \
     gnome-shell \
     mesa \
     net-tools \
