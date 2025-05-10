@@ -17,7 +17,13 @@ RUN set -exu \
     systemd \
     util-linux \
     wayland \
+    tar \
     xorg-xwayland
+
+RUN set -exu \
+  && cd / \
+  && wget https://github.com/replit/rfbproxy/releases/download/0.1.0/rfbproxy.tar.xz \
+  && tar xvf rfbproxy.tar.xz
 
 COPY rootfs.base /
 
@@ -41,8 +47,7 @@ RUN set -exu \
   && systemctl enable user-init.service \
   && systemctl --user --global enable gnome-shell.service \
   && systemctl --user --global enable setup-grd.service \
-  && systemctl --user --global disable gnome-remote-desktop.service \
-  && systemctl --user --global enable gnome-remote-desktop-headless.service \
+  && systemctl --user --global enable rfb-proxy.service \
   && systemctl disable display-manager \
   && systemctl disable wpa_supplicant \
   && systemctl disable ModemManager

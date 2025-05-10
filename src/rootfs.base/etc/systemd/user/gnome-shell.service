@@ -6,7 +6,6 @@ Type=dbus
 BusName=org.kubevda.gnomeshell
 Restart=always
 ExecStart=/usr/bin/gnome-shell --no-x11 --headless --mode=user
-# ExecStart=/bin/bash -c 'dbus-launch --sh-syntax; exec /usr/bin/gnome-shell --no-x11 --headless --mode=user'
 EnvironmentFile=/etc/default/kvdi
 
 [Install]
