@@ -4,5 +4,7 @@ faketty () {
   script -qfec "$(printf "%q " "$@")"
 }
 
+export $(dbus-launch)
+
 # faketty /sbin/agetty --autologin ${USER} --noclear - xterm
 faketty /usr/bin/login -f ${USER}

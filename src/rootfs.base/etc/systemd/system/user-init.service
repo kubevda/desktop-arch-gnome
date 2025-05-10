@@ -5,7 +5,6 @@ Wants=network.target
 [Service]
 Type=idle
 EnvironmentFile=/etc/default/kvdi
-ExecStartPre=export $(dbus-launch)
 ExecStart=/usr/local/sbin/fakegetty
 UtmpIdentifier=cons
 TTYVHangup=yes
