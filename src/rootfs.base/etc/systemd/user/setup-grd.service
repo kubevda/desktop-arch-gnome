@@ -2,7 +2,7 @@
 Description=Configure Gnome-Remote-Desktop
 
 [Service]
-Type=oneshot
+Type=dbus
 ExecStart=/usr/local/bin/setup-grd
 EnvironmentFile=/etc/default/kvdi
 

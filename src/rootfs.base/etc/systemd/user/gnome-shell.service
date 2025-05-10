@@ -2,7 +2,7 @@
 Description=Gnome-Shell
 
 [Service]
-Type=simple
+Type=dbus
 Restart=always
 ExecStart=/bin/bash -c 'export $$(dbus-launch) ; exec /usr/bin/gnome-shell --no-x11 --headless --mode=user'
 EnvironmentFile=/etc/default/kvdi
