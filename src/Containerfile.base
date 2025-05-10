@@ -41,6 +41,7 @@ RUN set -exu \
   && systemctl enable user-init.service \
   && systemctl --user --global enable gnome-shell.service \
   && systemctl --user --global enable setup-grd.service \
+  && systemctl --user --global disable gnome-remote-desktop.service \
   && systemctl --user --global enable gnome-remote-desktop-headless.service \
   && systemctl disable display-manager \
   && systemctl disable wpa_supplicant \
