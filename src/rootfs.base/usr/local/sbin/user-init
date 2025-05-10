@@ -1,8 +1,12 @@
 #!/bin/bash
 
-faketty () {
-  script -qfec "$(printf "%q " "$@")"
-}
-
-faketty /sbin/agetty -o '-p -f -- \\u' --noclear --autologin ${USER} %I $TERM
+# faketty () {
+#   script -qfec "$(printf "%q " "$@")"
+# }
+# 
+# # faketty /sbin/agetty -o '-p -f -- \\u' --noclear --autologin ${LOGINUSER} %I $TERM
 # faketty /usr/bin/login -f ${LOGINUSER}
+
+loginctl enable-linger "${LOGINUSER}"
+
+machinectl login

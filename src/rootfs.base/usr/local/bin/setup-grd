@@ -1,9 +1,9 @@
 #!/bin/bash
 
+dbus-launch --sh-syntax
+
 /usr/bin/grdctl --headless vnc set-auth-method password
 /usr/bin/grdctl --headless vnc set-password kubevda
 /usr/bin/grdctl --headless vnc disable-view-only
 /usr/bin/grdctl --headless vnc enable
 /usr/bin/grdctl --headless status
-
-tail -f /dev/null

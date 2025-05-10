@@ -2,8 +2,7 @@
 Description=Configure Gnome-Remote-Desktop
 
 [Service]
-Type=dbus
-BusName=org.kubevda.setupgrd
+Type=simple
 ExecStart=/usr/local/bin/setup-grd
 EnvironmentFile=/etc/default/kvdi
 

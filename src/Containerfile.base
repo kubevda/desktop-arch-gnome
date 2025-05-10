@@ -37,11 +37,11 @@ RUN set -exu \
       /usr/lib/systemd/system/anaconda.target.wants/* \
       /usr/lib/systemd/system/plymouth* \
       /usr/lib/systemd/system/systemd-update-utmp* \
-  && systemctl enable user-init.service \
   && systemctl enable dbus-broker.service \
+  && systemctl enable user-init.service \
   && systemctl --user --global enable gnome-shell.service \
   && systemctl --user --global enable setup-grd.service \
-  && systemctl --user --global enable gnome-remote-desktop.service \
+  && systemctl --user --global enable gnome-remote-desktop-headless.service \
   && systemctl disable display-manager \
   && systemctl disable wpa_supplicant \
   && systemctl disable ModemManager

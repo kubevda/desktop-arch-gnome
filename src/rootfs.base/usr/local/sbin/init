@@ -23,7 +23,7 @@ usermod \
     adm,sys,wheel,video,audio,tty,users \
       "${LOGINUSER}"
 
-passwd -d "${LOGINUSER}"
+passwd -l "${LOGINUSER}"
 
 echo "Setting up /run/user/${UID}"
 mkdir -p "/run/user/${UID}"
