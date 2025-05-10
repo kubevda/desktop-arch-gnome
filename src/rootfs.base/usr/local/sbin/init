@@ -1,9 +1,11 @@
 #!/bin/bash
 export USERHOME="/home/${USER}"
 
-export GROUP="${GROUP:-$USER}"
+export LOGINUSER="${USER}"
 
-echo "Setting up user account: ${USER}"
+export GROUP="${GROUP:-$LOGINUSER}"
+
+echo "Setting up user account: ${LOGINUSER}"
 
 groupadd \
   --gid "${UID}" \
@@ -14,23 +16,23 @@ useradd \
   --gid "${UID}" \
   --home-dir "${USERHOME}" \
   --shell /bin/bash \
-    "${USER}"
+    "${LOGINUSER}"
 
 usermod \
   -a -G \
     adm,sys,wheel,video,audio,tty,users \
-      "${USER}"
+      "${LOGINUSER}"
 
-passwd -d "${USER}"
+passwd -d "${LOGINUSER}"
 
 echo "Setting up /run/user/${UID}"
 mkdir -p "/run/user/${UID}"
 chmod 0700 "/run/user/${UID}"
-chown "${USER}":"${GROUP}" "/run/user/${UID}"
+chown "${LOGINUSER}":"${GROUP}" "/run/user/${UID}"
 
 if [[ "${ENABLE_ROOT}" == "true" ]] ; then
-  echo "Allowing passwordless sudo for ${USER}"
-  echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+  echo "Allowing passwordless sudo for ${LOGINUSER}"
+  echo "${LOGINUSER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 fi
 
 echo "Setting up user environment"
@@ -45,7 +47,7 @@ if [[ -z "${DISPLAY_SOCK_ADDR}" ]] ; then
 fi
 echo "Setting up VNC socket directory at $(dirname ${DISPLAY_SOCK_ADDR})"
 mkdir -pv "$(dirname ${DISPLAY_SOCK_ADDR})"
-chown -Rv "${USER}":"${GROUP}" "$(dirname ${DISPLAY_SOCK_ADDR})"
+chown -Rv "${LOGINUSER}":"${GROUP}" "$(dirname ${DISPLAY_SOCK_ADDR})"
 
 echo "Setting up pulseaudio"
 mkdir -pv "${USERHOME}/.config/pulse"
@@ -58,8 +60,8 @@ find /etc/default -type f -print | xargs -I{} bash -c '/usr/bin/envsubst < "$1" 
 # Append the current environment to /etc/default/kvdi
 env >> /etc/default/kvdi
 
-echo "Granting ${USER} ownership of ${USERHOME}"
-chown -R "${USER}":"${GROUP}" "${USERHOME}"
+echo "Granting ${LOGINUSER} ownership of ${USERHOME}"
+chown -R "${LOGINUSER}":"${GROUP}" "${USERHOME}"
 
 export container=docker
 exec /usr/lib/systemd/systemd

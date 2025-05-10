@@ -1,5 +1,7 @@
 FROM docker.io/archlinux:base
 
+ENV container docker
+
 RUN set -exu \
   && pacman --noconfirm -Syyu \
   && pacman --noconfirm -Syy \
@@ -34,8 +36,10 @@ RUN set -exu \
       /usr/lib/systemd/system/plymouth* \
       /usr/lib/systemd/system/systemd-update-utmp* \
   && systemctl enable user-init.service \
+  && systemctl enable dbus-broker.service \
   && systemctl --user --global enable gnome-shell.service \
   && systemctl --user --global enable setup-grd.service \
+  && systemctl --user --global enable gnome-remote-desktop.service \
   && systemctl disable display-manager \
   && systemctl disable wpa_supplicant \
   && systemctl disable ModemManager
