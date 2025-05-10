@@ -1,7 +1,7 @@
 #!/bin/bash
 
 faketty () {
-  script -qfec "$(printf "%q " "$@")" /dev/stdout
+  script -qfec "$(printf "%q " "$@")" /proc/self/fd/1
 }
 
 export $(dbus-launch)
