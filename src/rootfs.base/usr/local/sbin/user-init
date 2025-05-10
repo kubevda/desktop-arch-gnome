@@ -1,10 +1,8 @@
 #!/bin/bash
 
 faketty () {
-  script -qfec "$(printf "%q " "$@")" /proc/self/fd/1
+  script -qfec "$(printf "%q " "$@")"
 }
-
-export $(dbus-launch)
 
 faketty /sbin/agetty -o '-p -f -- \\u' --noclear --autologin ${USER} %I $TERM
 # faketty /usr/bin/login -f ${LOGINUSER}
