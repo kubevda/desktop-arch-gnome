@@ -109,9 +109,9 @@ jobs:
             type=ref,event=tag,priority=900
             type=raw,value=${{ github.sha }},priority=800
           images: |
-            ${{ env.IMAGE_PREFIX }}thin
+            ${{ env.IMAGE_PREFIX }}cuda
   
-      - name: Build and push Docker image - ThiCudan
+      - name: Build and push Docker image - Cuda
         id: build-cuda
         uses: docker/build-push-action@v6
         with:
