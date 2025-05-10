@@ -3,8 +3,8 @@ FROM docker.io/archlinux:base
 ENV container=docker
 
 RUN set -exu \
-  && pacman --noconfirm -Syyu \
-  && pacman --noconfirm -Syy \
+  && pacman --noconfirm -Syu \
+  && pacman --noconfirm -Sy \
     gdm \
     gnome-remote-desktop \
     gnome-shell \

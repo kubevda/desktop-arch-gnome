@@ -1,8 +1,8 @@
 FROM ghcr.io/kubevda/vdimage-arch-gnome-base:latest
 
 RUN set -exu \
-  && pacman --noconfirm -Syyu \
-  && pacman --noconfirm -Syy \
+  && pacman --noconfirm -Syu \
+  && pacman --noconfirm -Sy \
     code \
     curl \
     firefox \
