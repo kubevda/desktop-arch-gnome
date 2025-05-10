@@ -7,6 +7,8 @@
 # # faketty /sbin/agetty -o '-p -f -- \\u' --noclear --autologin ${LOGINUSER} %I $TERM
 # faketty /usr/bin/login -f ${LOGINUSER}
 
+rm /run/nologin || true
+
 loginctl enable-linger "${LOGINUSER}"
 
 machinectl login
