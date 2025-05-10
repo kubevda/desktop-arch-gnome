@@ -22,7 +22,22 @@ RUN set -exu \
   && dbus-uuidgen --ensure \
   && systemctl enable user-init.service \
   && systemctl --user --global enable gnome-shell.service \
-  && systemctl --user --global enable setup-grd.service
+  && systemctl --user --global enable setup-grd.service \
+  && systemctl disable display-manager \
+  && systemctl disable wpa_supplicant \
+  && systemctl disable ModemManager \
+  && cd /usr/lib/systemd/system/sysinit.target.wants/ \
+  && ls | grep -v systemd-tmpfiles-setup | xargs -n1 rm -f \
+  && rm -f /usr/lib/systemd/system/multi-user.target.wants/* \
+  /etc/systemd/system/*.wants/* \
+  /usr/lib/systemd/system/local-fs.target.wants/* \
+  /usr/lib/systemd/system/sockets.target.wants/*udev* \
+  /usr/lib/systemd/system/sockets.target.wants/*initctl* \
+  /usr/lib/systemd/system/basic.target.wants/* \
+  /usr/lib/systemd/system/anaconda.target.wants/* \
+  /usr/lib/systemd/system/plymouth* \
+  /usr/lib/systemd/system/systemd-update-utmp*
+
 
 VOLUME ["/sys/fs/cgroup"]
 ENTRYPOINT ["/usr/local/sbin/init"]
