@@ -1,9 +1,0 @@
-[Unit]
-Description=rfbproxy
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/rfbproxy --enable-audio --address=0.0.0.0:7900 --rfb-server=127.0.0.1:5900
-
-[Install]
-WantedBy=default.target
