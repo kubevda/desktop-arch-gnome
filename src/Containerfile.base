@@ -1,6 +1,6 @@
 FROM docker.io/archlinux:base
 
-ENV container docker
+ENV container=docker
 
 RUN set -exu \
   && pacman --noconfirm -Syyu \
